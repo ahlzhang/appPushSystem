@@ -1,0 +1,27 @@
+//执行 protoc -I . --go_out=plugins=grpc:. ./hello.proto
+//生成相应的go文件
+
+//指定proto版本
+syntax = "proto3";
+
+//指定包名
+package grpc;
+
+//定义Hello服务
+service PushRequest {
+    //定义SayHello方法
+    rpc PushServiceRequest (RequestParam) returns (RequestResult) {
+    }
+}
+
+message RequestParam {
+    int32 code = 1; //你猜
+    string param = 2;
+}
+
+message RequestResult {
+    int32 success = 1;
+    int32 errorCode = 2;
+    string errorMessage = 3;
+    string result = 4;
+}

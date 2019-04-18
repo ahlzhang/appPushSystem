@@ -1,0 +1,8 @@
+version: 4.0.0-alpha
+inputs:
+- lang: go
+  dir: ./
+  recursive: true
+output:
+  dir: document/doc
+  type: html
