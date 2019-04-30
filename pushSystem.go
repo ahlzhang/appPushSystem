@@ -44,5 +44,7 @@ func systemRun() {
 
 	s := grpc.NewServer()
 	pb.RegisterPushRequestServer(s, api.PushRequestIml{})
-	s.Serve(lis)
+	if err := s.Serve(lis); err != nil {
+		cfg.LogFatal("启动端口监听失败:", err.Error())
+	}
 }
