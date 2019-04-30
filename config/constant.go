@@ -20,12 +20,6 @@ const (
 )
 
 const (
-	_               = iota
-	PushRangeAll     // 推送所有人
-	PushRangeCustom  // 推送指定人群
-)
-
-const (
 	_                 = iota
 	MessageTypeSystem  //系统消息
 	MessageTypeHot     //热门消息

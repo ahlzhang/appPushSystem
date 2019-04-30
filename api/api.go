@@ -10,7 +10,6 @@ package api
 import (
 	"context"
 	"encoding/json"
-	"jiaotou.com/appPushSystem/config"
 	"jiaotou.com/appPushSystem/control"
 	"jiaotou.com/appPushSystem/grpc"
 	"jiaotou.com/appPushSystem/model"
@@ -66,7 +65,6 @@ func (PushRequestIml) PushServiceRequest(cxt context.Context, in *grpc.RequestPa
  * @apiParam typeId int 信息类型
  * @apiParam content string 信息内容
  * @apiParam channel int 消息发送渠道 1app 2运营平台
- * @apiParam pushRange int 消息范围 1所有人 2指定人群
  * @apiParam userIdList []int 需要推送的用户ID集合
  *
  * @apiSuccess 200 json ok
@@ -81,7 +79,6 @@ func addPushMessageApi(param string) (int, string, string) {
 		TypeId     int     `json:"typeId"`
 		Content    string  `json:"content"`
 		Channel    int     `json:"channel"`
-		PushRange  int     `json:"pushRange"`
 		UserIdList []int64 `json:"userIdList"`
 	}{}
 
@@ -90,19 +87,11 @@ func addPushMessageApi(param string) (int, string, string) {
 		return 30, "json解析失败", ""
 	}
 
-	if p.PushRange != config.PushRangeCustom && p.PushRange != config.PushRangeAll {
-		return 31, "pushRange错误", ""
-	}
-
-	if p.PushRange == config.PushRangeCustom && len(p.UserIdList) == 0 {
-		return 31, "推送范围错误", ""
-	}
-
 	msg, _ := model.GetMessageType(p.TypeId)
 	if msg != "" {
 		return 31, msg, ""
 	}
 
-	go control.AddMessageControl(p.Title, p.Img, p.Url, p.Content, p.Channel, p.PushRange, p.TypeId, p.UserIdList)
+	go control.AddMessageControl(p.Title, p.Img, p.Url, p.Content, p.Channel, p.TypeId, p.UserIdList)
 	return 0, "", ""
 }

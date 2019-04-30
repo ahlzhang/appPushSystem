@@ -34,7 +34,7 @@ func main() {
 
 func systemRun() {
 	model.StartDb()
-	go control.StartTask()
+	go control.StartPushMessageLoop()
 	api.StartFunLoad()
 
 	lis, err := net.Listen("tcp", config.Conf.System.ServicePort)

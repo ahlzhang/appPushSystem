@@ -1,27 +1,26 @@
 package template
 
-import "jiaotou.com/appPushSystem/control/igetui/protobuf"
+import "jiaotou.com/appPushSystem/pushCore/app/android/igetui/protobuf"
 import proto "github.com/golang/protobuf/proto"
 
-type LinkTemplate struct {
+type NotificationTemplate struct {
 	AppId               string
 	AppKey              string
 	Text                string
 	Title               string
 	Logo                string
-	Url                 string
+	TransmissionType    int32
+	TransmissionContent string
 	IsRing              bool
 	IsVibrate           bool
 	IsClearable         bool
 	PushType            string
-	TransmissionType    int32
-	TransmissionContent string
 }
 
-func NewLinkTemplate(appid string, appkey string, transmissiontype int32,
-	transmissionconntent string, titile string, text string, logo string, url string, isring bool,
-	isvibrate bool, isclearable bool) *LinkTemplate {
-	return &LinkTemplate{
+func NewNotificationTemplate(appid string, appkey string, transmissiontype int32,
+	transmissionconntent string, titile string, text string, logo string, isring bool,
+	isvibrate bool, isclearable bool) *NotificationTemplate {
+	return &NotificationTemplate{
 		AppId:               appid,
 		AppKey:              appkey,
 		TransmissionType:    transmissiontype,
@@ -29,7 +28,6 @@ func NewLinkTemplate(appid string, appkey string, transmissiontype int32,
 		Title:               titile,
 		Text:                text,
 		Logo:                logo,
-		Url:                 url,
 		IsRing:              isring,
 		IsVibrate:           isvibrate,
 		IsClearable:         isclearable,
@@ -37,15 +35,15 @@ func NewLinkTemplate(appid string, appkey string, transmissiontype int32,
 	}
 }
 
-func (t *LinkTemplate) GetTransmissionContent() string {
+func (t *NotificationTemplate) GetTransmissionContent() string {
 	return t.TransmissionContent
 }
 
-func (t *LinkTemplate) GetPushType() string {
+func (t *NotificationTemplate) GetPushType() string {
 	return t.PushType
 }
 
-func (t *LinkTemplate) GetTransparent() *protobuf.Transparent {
+func (t *NotificationTemplate) GetTransparent() *protobuf.Transparent {
 	transparent := &protobuf.Transparent{
 		Id:          proto.String(""),
 		Action:      proto.String("pushmessage"),
@@ -56,10 +54,11 @@ func (t *LinkTemplate) GetTransparent() *protobuf.Transparent {
 		PushInfo:    t.GetPushInfo(),
 		ActionChain: t.GetActionChains(),
 	}
+
 	return transparent
 }
 
-func (t *LinkTemplate) GetPushInfo() *protobuf.PushInfo {
+func (t *NotificationTemplate) GetPushInfo() *protobuf.PushInfo {
 	pushInfo := &protobuf.PushInfo{
 		Message:   proto.String(""),
 		ActionKey: proto.String(""),
@@ -69,7 +68,7 @@ func (t *LinkTemplate) GetPushInfo() *protobuf.PushInfo {
 	return pushInfo
 }
 
-func (t *LinkTemplate) GetActionChains() []*protobuf.ActionChain {
+func (t *NotificationTemplate) GetActionChains() []*protobuf.ActionChain {
 
 	//set actionChain
 	actionChain1 := &protobuf.ActionChain{
@@ -78,7 +77,7 @@ func (t *LinkTemplate) GetActionChains() []*protobuf.ActionChain {
 		Next:     proto.Int32(10000),
 	}
 
-	//start up app
+	//notification
 	actionChain2 := &protobuf.ActionChain{
 		ActionId:  proto.Int32(10000),
 		Type:      protobuf.ActionChain_notification.Enum(),
@@ -98,12 +97,22 @@ func (t *LinkTemplate) GetActionChains() []*protobuf.ActionChain {
 		Next:     proto.Int32(10030),
 	}
 
-	//start web
+	//appStartUp
+	appStartUp := &protobuf.AppStartUp{
+		Android: proto.String(""),
+		Symbia:  proto.String(""),
+		Ios:     proto.String(""),
+	}
+
+	//start app
 	actionChain4 := &protobuf.ActionChain{
-		ActionId: proto.Int32(10030),
-		Type:     protobuf.ActionChain_startweb.Enum(),
-		Url:      proto.String(t.Url),
-		Next:     proto.Int32(100),
+		ActionId:     proto.Int32(10030),
+		Type:         protobuf.ActionChain_startapp.Enum(),
+		Appid:        proto.String(""),
+		Autostart:    proto.Bool(t.TransmissionType == 1),
+		Appstartupid: appStartUp,
+		FailedAction: proto.Int32(100),
+		Next:         proto.Int32(100),
 	}
 	//end
 	actionChain5 := &protobuf.ActionChain{

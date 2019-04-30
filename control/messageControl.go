@@ -1,19 +1,19 @@
-/** 
- * 推送api.
+/**
+ * 消息相关
  *
- * User: zhangbob 
- * Date: 2018/5/22 
- * Time: 下午7:22 
+ * User: zhangbob
+ * Date: 2019-04-30
+ * Time: 13:37
  */
 package control
 
 import (
+	"jiaotou.com/appPushSystem/config"
 	"jiaotou.com/appPushSystem/model"
 	"time"
-	"jiaotou.com/appPushSystem/config"
 )
 
-func AddMessageControl(title, img, url, content string, channel, pushRange, typeId int, useridList []int64) {
+func AddMessageControl(title, img, url, content string, channel, typeId int, useridList []int64) {
 	var contentType int
 	if url == "" {
 		contentType = config.ContentTypeNotJump
@@ -22,7 +22,6 @@ func AddMessageControl(title, img, url, content string, channel, pushRange, type
 	}
 
 	m, msg := model.InsertMessage(model.MessagesCenter{
-		PushRange:   pushRange,
 		Content:     content,
 		Url:         url,
 		Img:         img,
@@ -34,10 +33,6 @@ func AddMessageControl(title, img, url, content string, channel, pushRange, type
 	})
 
 	if msg != "" {
-		return
-	}
-
-	if pushRange == config.PushRangeAll {
 		return
 	}
 
