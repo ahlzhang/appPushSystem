@@ -23,7 +23,7 @@ var instance messageHandle
 
 func GetIosHandleInstance() messageHandle {
 	once.Do(func() {
-		cert, err := certificate.FromPemFile(config.AppConfPath+config.Conf.PushInfo.Ios.Pem, config.Conf.PushInfo.Ios.Password)
+		cert, err := certificate.FromPemFile(config.AppConfPath+"/conf/"+config.Conf.PushInfo.Ios.Pem, config.Conf.PushInfo.Ios.Password)
 		if err != nil {
 			cfg.LogFatal("ios证书验证不正确:", err)
 		}

@@ -11,12 +11,12 @@ maxConn = 150
 maxIdleConn = 100
 
 [pushInfo]
-    [android]
+    [pushInfo.android]
     appKey = "bVUHL9VGkb7v2mMG89BsrA"
     appId = "A6XeYnzWWS6cYpg40gdi72"
     masterSecret = "WEcTyMoo2n97A0Pdv2zV14"
 
-    [ios]
+    [pushInfo.ios]
     model = "pro"
     password = ""
     pem = "cert.pem"
