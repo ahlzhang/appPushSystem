@@ -12,9 +12,9 @@ maxIdleConn = 100
 
 [pushInfo]
     [pushInfo.android]
-    appKey = "bVUHL9VGkb7v2mMG89BsrA"
-    appId = "A6XeYnzWWS6cYpg40gdi72"
-    masterSecret = "WEcTyMoo2n97A0Pdv2zV14"
+    appKey = "VCrFi2bMsV5GoJgfde6fW5"
+    appId = "fC1PHUhCyY5DcTmwXtrIc9"
+    masterSecret = "Fi1j7mPUyp6LXQHoBii2C9"
 
     [pushInfo.ios]
     model = "pro"
