@@ -28,7 +28,6 @@ func GetPushList() (pushList []PushStruct) {
 			c.title,
 			c.type_id,
 			c.content,
-			c.push_range,
 			c.create_time,
 			u.cid,
 			u.operating_system_type as app_type
@@ -36,7 +35,7 @@ func GetPushList() (pushList []PushStruct) {
 			t_app_message_center c
 			LEFT JOIN t_app_message_user_state s ON c.message_id = s.message_id
 			LEFT JOIN t_app_user u ON s.user_id = u.user_id
-		WHERE s.push_state = %d`, config.PushStateWaiting)
+		WHERE s.push_state = %d and u.cid <> ''`, config.PushStateWaiting)
 
 	err := GetDb().SQL(sql).Find(&pushList)
 	if err != nil {
