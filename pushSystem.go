@@ -18,6 +18,7 @@ import (
 	pb "jiaotou.com/appPushSystem/grpc"
 	"jiaotou.com/appPushSystem/model"
 	"jiaotou.com/appPushSystem/pkg/cfg"
+	app2 "jiaotou.com/appPushSystem/pushCore/app"
 	"net"
 	"os"
 )
@@ -35,6 +36,7 @@ func main() {
 func systemRun() {
 	model.StartDb()
 	go control.StartPushMessageLoop()
+	go app2.StartPushCore()
 	api.StartFunLoad()
 
 	lis, err := net.Listen("tcp", config.Conf.System.ServicePort)

@@ -58,6 +58,6 @@ func singlePush() {
 			msgList = append(msgList, message{v})
 		}
 
-		return msgList, nil
+		return msgList, DefaultCallback{}
 	})
 }

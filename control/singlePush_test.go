@@ -9,16 +9,19 @@ package control
 import (
 	"jiaotou.com/appPushSystem/config"
 	"jiaotou.com/appPushSystem/model"
+	app2 "jiaotou.com/appPushSystem/pushCore/app"
 	"os"
 	"testing"
+	"time"
 )
 
 func TestMain(m *testing.M) {
-	args := []string{"welfareOpenPlatform", "--dir", "/Users/zhangbob/git/golang/welfareOpenPlatform", "--is_test", "true"}
+	args := []string{"welfareOpenPlatform", "--dir", "/Users/zhangbob/git/golang/jiaotou/appPushSystem", "--is_test", "true"}
 
 	app := config.GetApp()
 	config.SetAfter(func() {
 		model.StartDb()
+		go app2.StartPushCore()
 	})
 	app.Run(args)
 
@@ -27,4 +30,6 @@ func TestMain(m *testing.M) {
 
 func TestSinglePush(t *testing.T) {
 	singlePush()
+
+	time.Sleep(time.Second * 10)
 }

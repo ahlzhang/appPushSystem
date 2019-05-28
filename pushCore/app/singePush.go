@@ -17,7 +17,7 @@ import (
 var instance SinglePush
 
 //启动单条推送队列
-func init() {
+func StartPushCore() {
 	instance = SinglePush{}
 	instance.messageList = make(chan messageParam, 500000)
 	go instance.loop()

@@ -61,7 +61,7 @@ func (m message) ToMessage() (int64, string, string) {
 		content = androidEncode(m.Id, int64(m.TypeId), m.Content, m.Title)
 	}
 
-	return m.MessageId, m.PushTo, content
+	return m.Id, m.PushTo, content
 }
 
 func (m message) GetSystemType() int {
