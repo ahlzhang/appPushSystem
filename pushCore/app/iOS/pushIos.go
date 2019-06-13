@@ -34,7 +34,7 @@ func GetIosHandleInstance() messageHandle {
 			cfg.LogFatal("ios包名未配置。")
 		}
 
-		if config.Conf.PushInfo.Ios.Model == "PRO" {
+		if !config.Conf.PushInfo.Ios.IsDev {
 			instance.apnsClient = apns.NewClient(cert).Production()
 		} else {
 			instance.apnsClient = apns.NewClient(cert).Development()

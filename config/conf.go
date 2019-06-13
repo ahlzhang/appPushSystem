@@ -108,7 +108,7 @@ type android struct {
 }
 
 type iOS struct {
-	Model    string
+	IsDev    bool
 	Password string
 	Pem      string
 	Package  string

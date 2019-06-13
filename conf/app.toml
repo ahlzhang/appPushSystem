@@ -17,7 +17,7 @@ maxIdleConn = 100
     masterSecret = "Fi1j7mPUyp6LXQHoBii2C9"
 
     [pushInfo.ios]
-    model = "pro"
+    isDev = false
     password = ""
-    pem = "cert.pem"
-    package = "com.welfare.platform"
+    pem = "jt-apns-dis.pem"
+    package = "com.scst.tifamily"
