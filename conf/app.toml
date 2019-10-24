@@ -6,7 +6,7 @@ logLevel=1 # 日志级别，0:debug, 1:info, 2:warn, 3:error, 4:fatal
 logFlag=6 # 设置log格式,多选项可相加，1:显示调用路径，2:现在文件名，4:显示函数名，8:error日志程序退出
 
 [sql]
-writeConn =  "root:hexinpass001@tcp(192.168.2.200:3306)/jiaotou?charset=utf8&parseTime=true"
+writeConn =  "root:hexinpass001@tcp(192.168.2.240:3306)/jiaotou?charset=utf8&parseTime=true"
 maxConn = 150
 maxIdleConn = 100
 

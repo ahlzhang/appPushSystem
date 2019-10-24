@@ -55,6 +55,7 @@ func singlePush() {
 				continue
 			}
 
+			cfg.LogInfof("准备推送:数据为:%+v", v)
 			msgList = append(msgList, message{v})
 		}
 
