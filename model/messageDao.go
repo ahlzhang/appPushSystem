@@ -85,3 +85,10 @@ func InsertMessageUser(param []MessageUser) (string) {
 
 	return ""
 }
+
+func UpdateState(id []int64, state int) {
+	_, err := GetDb().Cols("push_state").In("id", id).Update(MessageUser{PushState: state})
+	if err != nil {
+		cfg.LogWarn("批量更新商品详情失败:", err.Error())
+	}
+}

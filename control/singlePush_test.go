@@ -29,7 +29,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestSinglePush(t *testing.T) {
-	go singlePush()
+	StartPushMessageLoop()
 
 	time.Sleep(time.Second * 60)
 }

@@ -40,8 +40,6 @@ type messageHandle struct {
 }
 
 func (t messageHandle) PushSingle(msg pushCore.IMessage, callBack pushCore.IHandleMessageCallback) {
-	callBack.Sending(msg)
-
 	_, clientId, content := msg.ToMessage()
 	if clientId == "" {
 		callBack.Fail(msg, errors.New("tokenId为空"))

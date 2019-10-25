@@ -32,6 +32,7 @@ func singlePush() {
 
 		var msgList []pushCore.IMessage
 
+		var idList []int64
 		android := config.SystemAndroid
 		ios := config.SystemIos
 		for _, v := range p {
@@ -57,8 +58,30 @@ func singlePush() {
 
 			cfg.LogInfof("准备推送:数据为:%+v", v)
 			msgList = append(msgList, message{v})
+			idList = append(idList, v.Id)
 		}
 
+		updateStateSending(idList)
 		return msgList, DefaultCallback{}
 	})
+}
+
+func updateStateSending(idList []int64) {
+	var maxUpdate = 5000
+	length := len(idList)
+
+	for i := 1; i <= length/maxUpdate+1; i++ {
+		start := (i - 1) * maxUpdate
+		end := start + maxUpdate
+
+		if start >= length {
+			break
+		}
+
+		if end > length {
+			end = length
+		}
+
+		model.UpdateState(idList[start:end], config.PushStateSending)
+	}
 }

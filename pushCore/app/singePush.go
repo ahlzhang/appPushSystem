@@ -9,6 +9,7 @@ package app
 
 import (
 	"errors"
+	"jiaotou.com/appPushSystem/pkg/cfg"
 	"jiaotou.com/appPushSystem/pushCore"
 	"jiaotou.com/appPushSystem/pushCore/app/android"
 	"jiaotou.com/appPushSystem/pushCore/app/iOS"
@@ -20,7 +21,7 @@ var instance SinglePush
 func StartPushCore() {
 	instance = SinglePush{}
 	instance.messageList = make(chan messageParam, 500000)
-	go instance.loop()
+	instance.loop()
 }
 
 /**
@@ -37,6 +38,9 @@ func StartPushCore() {
 func AddSingleMessage(message pushCore.IMessage, callback pushCore.IHandleMessageCallback) {
 	m := messageParam{Message: message, Callback: callback}
 
+	//callback.Sending(message) //发送中
+
+	cfg.LogInfo("通道数量:", len(instance.messageList))
 	instance.messageList <- m
 }
 

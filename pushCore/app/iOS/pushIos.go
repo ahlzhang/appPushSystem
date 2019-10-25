@@ -50,8 +50,6 @@ type messageHandle struct {
 }
 
 func (t messageHandle) PushSingle(message pushCore.IMessage, callBack pushCore.IHandleMessageCallback) {
-	callBack.Sending(message)
-
 	_, clientId, content := message.ToMessage()
 	notification := &apns.Notification{}
 	notification.DeviceToken = clientId
