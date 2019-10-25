@@ -9,7 +9,6 @@ package app
 
 import (
 	"errors"
-	"jiaotou.com/appPushSystem/pkg/cfg"
 	"jiaotou.com/appPushSystem/pushCore"
 	"jiaotou.com/appPushSystem/pushCore/app/android"
 	"jiaotou.com/appPushSystem/pushCore/app/iOS"
@@ -39,8 +38,6 @@ func AddSingleMessage(message pushCore.IMessage, callback pushCore.IHandleMessag
 	m := messageParam{Message: message, Callback: callback}
 
 	//callback.Sending(message) //发送中
-
-	cfg.LogInfo("通道数量:", len(instance.messageList))
 	instance.messageList <- m
 }
 
