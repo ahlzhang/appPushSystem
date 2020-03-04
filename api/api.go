@@ -10,10 +10,10 @@ package api
 import (
 	"context"
 	"encoding/json"
-	"jiaotou.com/appPushSystem/control"
-	"jiaotou.com/appPushSystem/grpc"
-	"jiaotou.com/appPushSystem/model"
-	"jiaotou.com/appPushSystem/pkg/cfg"
+	"sbjr.com/appPushSystem/control"
+	"sbjr.com/appPushSystem/grpc"
+	"sbjr.com/appPushSystem/model"
+	"sbjr.com/appPushSystem/pkg/cfg"
 )
 
 const (

@@ -9,9 +9,9 @@ package app
 
 import (
 	"errors"
-	"jiaotou.com/appPushSystem/pushCore"
-	"jiaotou.com/appPushSystem/pushCore/app/android"
-	"jiaotou.com/appPushSystem/pushCore/app/iOS"
+	"sbjr.com/appPushSystem/pushCore"
+	"sbjr.com/appPushSystem/pushCore/app/android"
+	"sbjr.com/appPushSystem/pushCore/app/iOS"
 )
 
 var instance SinglePush
@@ -37,7 +37,7 @@ func StartPushCore() {
 func AddSingleMessage(message pushCore.IMessage, callback pushCore.IHandleMessageCallback) {
 	m := messageParam{Message: message, Callback: callback}
 
-	//callback.Sending(message) //发送中
+	callback.Sending(message) //发送中
 	instance.messageList <- m
 }
 

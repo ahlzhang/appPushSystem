@@ -1,5 +1,5 @@
 /** 
- * @api post pushCore. 
+ * @api post core.
  *
  * User: zhangbob 
  * Date: 2018-11-01 

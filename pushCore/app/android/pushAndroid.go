@@ -10,11 +10,11 @@ package android
 import (
 	"errors"
 	"fmt"
-	"jiaotou.com/appPushSystem/config"
-	"jiaotou.com/appPushSystem/pkg/cfg"
-	"jiaotou.com/appPushSystem/pushCore"
-	"jiaotou.com/appPushSystem/pushCore/app/android/igetui"
-	"jiaotou.com/appPushSystem/pushCore/app/android/igetui/template"
+	"sbjr.com/appPushSystem/config"
+	"sbjr.com/appPushSystem/pkg/cfg"
+	"sbjr.com/appPushSystem/pushCore"
+	"sbjr.com/appPushSystem/pushCore/app/android/igetui"
+	"sbjr.com/appPushSystem/pushCore/app/android/igetui/template"
 	"sync"
 )
 

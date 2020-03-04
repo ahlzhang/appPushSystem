@@ -9,12 +9,12 @@ package iOS
 
 import (
 	"errors"
-	"jiaotou.com/appPushSystem/config"
-	"jiaotou.com/appPushSystem/pkg/cfg"
+	"sbjr.com/appPushSystem/config"
+	"sbjr.com/appPushSystem/pkg/cfg"
 
 	apns "github.com/sideshow/apns2"
 	"github.com/sideshow/apns2/certificate"
-	"jiaotou.com/appPushSystem/pushCore"
+	"sbjr.com/appPushSystem/pushCore"
 	"sync"
 )
 

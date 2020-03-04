@@ -10,8 +10,8 @@ package config
 import (
 	"github.com/BurntSushi/toml"
 	"gopkg.in/urfave/cli.v2"
-	"jiaotou.com/appPushSystem/pkg/cfg"
-	"jiaotou.com/appPushSystem/utils"
+	"sbjr.com/appPushSystem/pkg/cfg"
+	"sbjr.com/appPushSystem/utils"
 )
 
 var Conf Config

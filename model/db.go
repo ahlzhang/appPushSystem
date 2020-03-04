@@ -3,8 +3,8 @@ package model
 import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
-	"jiaotou.com/appPushSystem/config"
-	"jiaotou.com/appPushSystem/pkg/cfg"
+	"sbjr.com/appPushSystem/config"
+	"sbjr.com/appPushSystem/pkg/cfg"
 )
 
 var MysqlDefault *xorm.Engine

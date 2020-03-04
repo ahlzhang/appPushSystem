@@ -8,8 +8,8 @@
 package control
 
 import (
-	"jiaotou.com/appPushSystem/config"
-	"jiaotou.com/appPushSystem/model"
+	"sbjr.com/appPushSystem/config"
+	"sbjr.com/appPushSystem/model"
 	"time"
 )
 

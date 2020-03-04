@@ -7,9 +7,9 @@
 package control
 
 import (
-	"jiaotou.com/appPushSystem/config"
-	"jiaotou.com/appPushSystem/model"
-	app2 "jiaotou.com/appPushSystem/pushCore/app"
+	"sbjr.com/appPushSystem/config"
+	"sbjr.com/appPushSystem/model"
+	app2 "sbjr.com/appPushSystem/pushCore/app"
 	"os"
 	"testing"
 	"time"

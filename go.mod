@@ -1,4 +1,4 @@
-module jiaotou.com/appPushSystem
+module sbjr.com/appPushSystem
 
 go 1.12
 

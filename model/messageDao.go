@@ -2,8 +2,8 @@ package model
 
 import (
 	"fmt"
-	"jiaotou.com/appPushSystem/config"
-	"jiaotou.com/appPushSystem/pkg/cfg"
+	"sbjr.com/appPushSystem/config"
+	"sbjr.com/appPushSystem/pkg/cfg"
 	"time"
 )
 

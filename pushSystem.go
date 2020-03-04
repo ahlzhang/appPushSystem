@@ -1,5 +1,5 @@
 /**
- * @apidoc 积分推送系统
+ * @apidoc 巴中社保项目推送系统
  * @apiVersion -1.0.1
  * @apiBaseURL http://192.168.2.200:6002
  * @apiContent 首页
@@ -12,15 +12,14 @@ package main
 
 import (
 	"google.golang.org/grpc"
-	"jiaotou.com/appPushSystem/api"
-	"jiaotou.com/appPushSystem/config"
-	"jiaotou.com/appPushSystem/control"
-	pb "jiaotou.com/appPushSystem/grpc"
-	"jiaotou.com/appPushSystem/model"
-	"jiaotou.com/appPushSystem/pkg/cfg"
-	app2 "jiaotou.com/appPushSystem/pushCore/app"
 	"net"
 	"os"
+	"sbjr.com/appPushSystem/api"
+	"sbjr.com/appPushSystem/config"
+	"sbjr.com/appPushSystem/control"
+	pb "sbjr.com/appPushSystem/grpc"
+	"sbjr.com/appPushSystem/model"
+	"sbjr.com/appPushSystem/pkg/cfg"
 )
 
 func main() {
@@ -36,7 +35,6 @@ func main() {
 func systemRun() {
 	model.StartDb()
 	go control.StartPushMessageLoop()
-	go app2.StartPushCore()
 	api.StartFunLoad()
 
 	lis, err := net.Listen("tcp", config.Conf.System.ServicePort)

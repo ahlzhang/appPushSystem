@@ -9,42 +9,47 @@ package control
 
 import (
 	"encoding/json"
-	"jiaotou.com/appPushSystem/config"
-	"jiaotou.com/appPushSystem/model"
-	"jiaotou.com/appPushSystem/pkg/cfg"
-	"jiaotou.com/appPushSystem/pushCore"
-	"jiaotou.com/appPushSystem/pushCore/app"
+	"sbjr.com/appPushSystem/config"
+	"sbjr.com/appPushSystem/model"
+	"sbjr.com/appPushSystem/pkg/cfg"
+	"sbjr.com/appPushSystem/pushCore"
 )
 
-func PushMessage(f func() ([]pushCore.IMessage, pushCore.IHandleMessageCallback)) {
-	meg, callback := f()
-	pushCore := HandleMessages{MessageList: meg, callback: callback}
-	pushCore.Push()
-}
-
 type HandleMessages struct {
-	callback    pushCore.IHandleMessageCallback
 	MessageList []pushCore.IMessage
 }
 
-//单条消息处理。
-func (h *HandleMessages) Push() {
-	if len(h.MessageList) == 0 {
-		return
+//实现获取消息接口
+func (t *HandleMessages) GetMessage() []pushCore.IMessage {
+	// TODO 获取需要推送的消息；按照自己的实际情况实现
+	p := model.GetPushList()
+	android := config.SystemAndroid
+	ios := config.SystemIos
+	for _, v := range p {
+		if v.AppType != pushCore.SystemAndroid && v.AppType != pushCore.SystemIos {
+			continue
+		}
+
+		if v.AppType == android {
+			if v.AppType != pushCore.SystemAndroid {
+				v.AppType = pushCore.SystemAndroid
+			}
+		}
+
+		if v.AppType == ios {
+			if v.AppType != pushCore.SystemIos {
+				v.AppType = pushCore.SystemIos
+			}
+		}
+
+		if v.PushTo == "" {
+			continue
+		}
+
+		t.MessageList = append(t.MessageList, message{v})
 	}
 
-	if h.callback == nil {
-		h.callback = defaultCallback
-	}
-
-	for _, v := range h.MessageList {
-		app.AddSingleMessage(v, h.callback)
-	}
-}
-
-//设置消息处理回调
-func (h *HandleMessages) SetHandleCallback(callback pushCore.IHandleMessageCallback) {
-	h.callback = callback
+	return t.MessageList
 }
 
 //转换成推送使用的类型。需要自定义
@@ -66,27 +71,6 @@ func (m message) ToMessage() (int64, string, string) {
 
 func (m message) GetSystemType() int {
 	return m.AppType
-}
-
-var defaultCallback DefaultCallback
-
-//默认消息处理回调.需要自己定义。默认为单条推送
-type DefaultCallback struct {
-}
-
-func (DefaultCallback) Sending(message pushCore.IMessage) {
-	id, _, _ := message.ToMessage()
-	model.UpdatePushBySingle(id, config.PushStateSending)
-}
-
-func (DefaultCallback) Success(message pushCore.IMessage) {
-	id, _, _ := message.ToMessage()
-	model.UpdatePushBySingle(id, config.PushStateAlready)
-}
-
-func (DefaultCallback) Fail(message pushCore.IMessage, err error) {
-	id, _, _ := message.ToMessage()
-	model.UpdatePushBySingle(id, config.PushStateFail)
 }
 
 //传给android端的消息样式
