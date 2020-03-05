@@ -1,6 +1,6 @@
 package template
 
-import "appPushSystem/app/android/igetui/protobuf"
+import "github.com/ahlzhang/appPushSystem/app/android/igetui/protobuf"
 import proto "github.com/golang/protobuf/proto"
 
 type LinkTemplate struct {

@@ -8,9 +8,9 @@
 package appPushSystem
 
 import (
-	"appPushSystem/app/android"
-	"appPushSystem/app/iOS"
 	"errors"
+	"github.com/ahlzhang/appPushSystem/app/android"
+	"github.com/ahlzhang/appPushSystem/app/iOS"
 )
 
 type AndroidParam struct {

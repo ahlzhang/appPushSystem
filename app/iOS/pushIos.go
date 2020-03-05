@@ -8,8 +8,8 @@
 package iOS
 
 import (
-	"appPushSystem"
 	"errors"
+	"github.com/ahlzhang/appPushSystem"
 
 	apns "github.com/sideshow/apns2"
 	"github.com/sideshow/apns2/certificate"

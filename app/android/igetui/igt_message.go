@@ -1,6 +1,6 @@
 package igetui
 
-import "appPushSystem/app/android/igetui/template"
+import "github.com/ahlzhang/appPushSystem/app/android/igetui/template"
 
 type IGtMessage struct {
 	IsOffline         bool

@@ -1,6 +1,6 @@
 package template
 
-import "appPushSystem/app/android/igetui/protobuf"
+import "github.com/ahlzhang/appPushSystem/app/android/igetui/protobuf"
 
 //import proto "code.google.com/p/goprotobuf/proto"
 

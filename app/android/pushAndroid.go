@@ -8,11 +8,11 @@
 package android
 
 import (
-	"appPushSystem"
-	"appPushSystem/app/android/igetui"
-	"appPushSystem/app/android/igetui/template"
 	"errors"
 	"fmt"
+	"github.com/ahlzhang/appPushSystem"
+	"github.com/ahlzhang/appPushSystem/app/android/igetui"
+	"github.com/ahlzhang/appPushSystem/app/android/igetui/template"
 )
 
 const igtHost = "http://sdk.open.api.igexin.com/apiex.htm"

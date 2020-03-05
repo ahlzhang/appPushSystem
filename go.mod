@@ -1,4 +1,4 @@
-module appPushSystem
+module github.com/ahlzhang/appPushSystem
 
 go 1.12
 
