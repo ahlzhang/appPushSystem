@@ -5,7 +5,7 @@
  * Date: 2018-11-10 
  * Time: 17:44 
  */
-package pushCore
+package appPushSystem
 
 const (
 	_             = iota

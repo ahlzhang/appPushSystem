@@ -1,6 +1,6 @@
 package template
 
-import "sbjr.com/appPushSystem/pushCore/app/android/igetui/protobuf"
+import "appPushSystem/app/android/igetui/protobuf"
 import proto "github.com/golang/protobuf/proto"
 
 type TransmissionTemplate struct {

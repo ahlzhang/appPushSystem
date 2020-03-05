@@ -8,29 +8,21 @@
 package android
 
 import (
+	"appPushSystem"
+	"appPushSystem/app/android/igetui"
+	"appPushSystem/app/android/igetui/template"
 	"errors"
 	"fmt"
-	"sbjr.com/appPushSystem/config"
-	"sbjr.com/appPushSystem/pkg/cfg"
-	"sbjr.com/appPushSystem/pushCore"
-	"sbjr.com/appPushSystem/pushCore/app/android/igetui"
-	"sbjr.com/appPushSystem/pushCore/app/android/igetui/template"
-	"sync"
 )
 
 const igtHost = "http://sdk.open.api.igexin.com/apiex.htm"
 
-var once sync.Once
-var instance messageHandle
-
-func GetAndroidHandleInstance() messageHandle {
-	once.Do(func() {
-		instance.key = config.Conf.PushInfo.Android.AppKey
-		instance.appId = config.Conf.PushInfo.Android.AppId
-		instance.secret = config.Conf.PushInfo.Android.MasterSecret
-	})
-
-	return instance
+func NewAndroidPush(appKey, appId, secret string) *messageHandle {
+	return &messageHandle{
+		key:    appKey,
+		appId:  appId,
+		secret: secret,
+	}
 }
 
 type messageHandle struct {
@@ -39,7 +31,7 @@ type messageHandle struct {
 	secret string
 }
 
-func (t messageHandle) PushSingle(msg pushCore.IMessage, callBack pushCore.IHandleMessageCallback) {
+func (t messageHandle) PushSingle(msg appPushSystem.IMessage, callBack appPushSystem.IHandleMessageCallback) {
 	_, clientId, content := msg.ToMessage()
 	if clientId == "" {
 		callBack.Fail(msg, errors.New("tokenId为空"))
@@ -55,7 +47,6 @@ func (t messageHandle) PushSingle(msg pushCore.IMessage, callBack pushCore.IHand
 	if v, ok := result["result"]; ok && v == "ok" {
 		callBack.Success(msg)
 	} else {
-		cfg.LogWarnf("安卓推送失败, 返回值:%s", result)
 		callBack.Fail(msg, errors.New(fmt.Sprintf("安卓推送失败:%s", result)))
 	}
 }
@@ -74,7 +65,6 @@ func (t messageHandle) PushList(cIdList []string, idList []int64, content string
 
 	contentId := pushs.GetContentId(*message)
 	if contentId == " " {
-		cfg.LogWarn("安卓推失败:群推获取contentId失败")
 		return errors.New("获取contentId失败")
 	}
 
@@ -82,7 +72,6 @@ func (t messageHandle) PushList(cIdList []string, idList []int64, content string
 	if v, ok := result["result"]; ok && v == "ok" {
 		return nil
 	} else {
-		cfg.LogWarnf("push error,  result:", result)
 		return errors.New(fmt.Sprintf("安卓推送失败,返回值:%s", result))
 	}
 }
