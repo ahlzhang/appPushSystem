@@ -7,8 +7,10 @@
  */
 package appPushSystem
 
+import core2 "github.com/ahlzhang/appPushSystem/core"
+
 //创建实例，项目只能有一个此实例
-func GetCoreInstance(message GetMessage, callback IHandleMessageCallback, and AndroidParam, ios IosParam) (*core, error) {
+func GetCoreInstance(message GetMessage, callback core2.IHandleMessageCallback, and AndroidParam, ios IosParam) (*core, error) {
 	instance := &core{
 		GetMessage:             message,
 		IHandleMessageCallback: callback,
@@ -26,12 +28,12 @@ func GetCoreInstance(message GetMessage, callback IHandleMessageCallback, and An
 
 // 获取消息
 type GetMessage interface {
-	GetMessage() []IMessage
+	GetMessage() []core2.IMessage
 }
 
 type core struct {
 	GetMessage
-	IHandleMessageCallback
+	core2.IHandleMessageCallback
 	pushHandle *singlePush
 }
 

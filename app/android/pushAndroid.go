@@ -10,9 +10,9 @@ package android
 import (
 	"errors"
 	"fmt"
-	"github.com/ahlzhang/appPushSystem"
 	"github.com/ahlzhang/appPushSystem/app/android/igetui"
 	"github.com/ahlzhang/appPushSystem/app/android/igetui/template"
+	"github.com/ahlzhang/appPushSystem/core"
 )
 
 const igtHost = "http://sdk.open.api.igexin.com/apiex.htm"
@@ -31,7 +31,7 @@ type messageHandle struct {
 	secret string
 }
 
-func (t messageHandle) PushSingle(msg appPushSystem.IMessage, callBack appPushSystem.IHandleMessageCallback) {
+func (t messageHandle) PushSingle(msg core.IMessage, callBack core.IHandleMessageCallback) {
 	_, clientId, content := msg.ToMessage()
 	if clientId == "" {
 		callBack.Fail(msg, errors.New("tokenId为空"))

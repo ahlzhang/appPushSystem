@@ -5,7 +5,7 @@
  * Date: 2018-11-01 
  * Time: 18:29 
  */
-package appPushSystem
+package core
 
 type IMessageHandle interface {
 	PushSingle(message IMessage, callback IHandleMessageCallback)

@@ -9,7 +9,7 @@ package iOS
 
 import (
 	"errors"
-	"github.com/ahlzhang/appPushSystem"
+	"github.com/ahlzhang/appPushSystem/core"
 
 	apns "github.com/sideshow/apns2"
 	"github.com/sideshow/apns2/certificate"
@@ -43,7 +43,7 @@ type messageHandle struct {
 	packageName string
 }
 
-func (t messageHandle) PushSingle(message appPushSystem.IMessage, callBack appPushSystem.IHandleMessageCallback) {
+func (t messageHandle) PushSingle(message core.IMessage, callBack core.IHandleMessageCallback) {
 	_, clientId, content := message.ToMessage()
 	notification := &apns.Notification{}
 	notification.DeviceToken = clientId

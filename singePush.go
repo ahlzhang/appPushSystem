@@ -11,6 +11,7 @@ import (
 	"errors"
 	"github.com/ahlzhang/appPushSystem/app/android"
 	"github.com/ahlzhang/appPushSystem/app/iOS"
+	core2 "github.com/ahlzhang/appPushSystem/core"
 )
 
 type AndroidParam struct {
@@ -43,8 +44,8 @@ func NewSinglePushHandle(and AndroidParam, ios IosParam) (*singlePush, error) {
 
 type singlePush struct {
 	messageList     chan messageParam
-	androidInstance IMessageHandle
-	iOSInstance     IMessageHandle
+	androidInstance core2.IMessageHandle
+	iOSInstance     core2.IMessageHandle
 }
 
 /**
@@ -58,7 +59,7 @@ type singlePush struct {
  * @param failCallback 失败回调。(方法)
  *
  **/
-func (s *singlePush) AddSingleMessage(message IMessage, callback IHandleMessageCallback) {
+func (s *singlePush) AddSingleMessage(message core2.IMessage, callback core2.IHandleMessageCallback) {
 	callback.Sending(message) //发送中
 	s.messageList <- messageParam{Message: message, Callback: callback}
 }
@@ -73,7 +74,7 @@ func (s singlePush) loop() {
 	}
 }
 
-func (s *singlePush) getSystem(pushType int) IMessageHandle {
+func (s *singlePush) getSystem(pushType int) core2.IMessageHandle {
 	if pushType == SystemAndroid {
 		return s.androidInstance
 	}
@@ -86,6 +87,6 @@ func (s *singlePush) getSystem(pushType int) IMessageHandle {
 }
 
 type messageParam struct {
-	Message  IMessage
-	Callback IHandleMessageCallback
+	Message  core2.IMessage
+	Callback core2.IHandleMessageCallback
 }
